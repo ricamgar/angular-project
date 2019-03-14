@@ -1,27 +1,55 @@
-<div class="container">
-  <ng-container *ngFor="let name of names">
-    <h1 *ngIf="name !== 'Juan'">Hola {{name}}</h1>
-  </ng-container>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure
-    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="container" style="padding-bottom: 50px">
+  <h1> La página de {{name}}</h1>
+  <p>Esto es un párrafo</p>
   <input type="text" [(ngModel)]="name">
   <button class="btn-primary" (click)="onButtonClicked()">Pulsar</button>
+  <div class="row">
+    <div class="col">
+      <h3>ngFor example</h3>
+      <ul>
+        <li *ngFor="let person of people">
+          {{person.name}} ({{person.age}})
+        </li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>ngFor example with index</h3>
+      <ul>
+        <li *ngFor="let person of people; let i = index">
+          {{i}} {{person.name}} ({{person.age}})
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <h3>ngSwitch example</h3>
-  <ul>
-    <ng-container *ngFor="let person of people" [ngSwitch]="person.country">
-      <li *ngSwitchCase="'ES'" class="text-danger">
-        {{person.name}} ({{person.age}})
-      </li>
-      <li *ngSwitchCase="'FR'" class="text-primary">
-        {{person.name}} ({{person.age}})
-      </li>
-      <li *ngSwitchDefault class="text-warning">
-        {{person.name}} ({{person.age}})
-      </li>
-    </ng-container>
-  </ul>
+  <div class="row">
+    <div class="col">
+      <h3>ngIf example</h3>
+      <ul>
+        <ng-container *ngFor="let person of people">
+          <li *ngIf="person.age >= 30">
+            {{person.name}} ({{person.age}})
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>ngSwitch example</h3>
+      <ul>
+        <ng-container *ngFor="let person of people" [ngSwitch]="person.country">
+          <li *ngSwitchCase="'ES'" class="text-danger">
+            {{person.name}} ({{person.age}})
+          </li>
+          <li *ngSwitchCase="'FR'" class="text-primary">
+            {{person.name}} ({{person.age}})
+          </li>
+          <li *ngSwitchDefault class="text-warning">
+            {{person.name}} ({{person.age}})
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+
+
 </div>

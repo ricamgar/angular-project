@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent {
 
+  name = 'Paco';
+
   people = [
     {'name': 'Jose', 'age': '23', 'country': 'ES'},
     {'name': 'Sara', 'age': '30', 'country': 'FR'},
