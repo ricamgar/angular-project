@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import {PersonsService} from '../persons.service';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent {
+export class ContentComponent implements OnInit {
+  name = '';
+  people: { name: string; age: number; country: string }[] = [];
 
-  name = 'Paco';
+  constructor(private personsService: PersonsService){}
 
-  people = [
-    {'name': 'Jose', 'age': '23', 'country': 'ES'},
-    {'name': 'Sara', 'age': '30', 'country': 'FR'},
-    {'name': 'Tomás', 'age': '31', 'country': 'ES'},
-    {'name': 'Carla', 'age': '26', 'country': 'FR'},
-    {'name': 'Laura', 'age': '29', 'country': 'UK'},
-  ];
+  ngOnInit(): void {
+    this.people = this.personsService.getAllPeople();
+  }
+
+  onSearch(name: string) {
+    if (name == '') this.people = this.personsService.getAllPeople();
+    else this.people = this.personsService.getPerson(name);
+  }
 }
