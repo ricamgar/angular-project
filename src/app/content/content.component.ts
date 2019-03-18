@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PersonsService} from '../persons.service';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-content',
@@ -13,11 +14,13 @@ export class ContentComponent implements OnInit {
   constructor(private personsService: PersonsService){}
 
   ngOnInit(): void {
-    this.people = this.personsService.getAllPeople();
-  }
-
-  onSearch(name: string) {
-    if (name == '') this.people = this.personsService.getAllPeople();
-    else this.people = this.personsService.getPerson(name);
+    this.personsService.getAllPeople()
+      .subscribe(
+        (users: { name: string; age: number; country: string }[]) => {
+          this.people = users;
+        },
+        (error) => {},
+        () => {}
+      )
   }
 }
