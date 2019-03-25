@@ -10,4 +10,8 @@ export class PersonsService {
   getAllPeople() {
     return this.http.get('http://localhost:8888/users');
   }
+
+  getById(id: number) {
+    return this.http.get('http://localhost:8888/user/' + id);
+  }
 }

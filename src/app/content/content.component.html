@@ -1,55 +1,20 @@
-<div class="container" style="padding-bottom: 50px">
-  <h1> La página de {{name}}</h1>
-  <p>Esto es un párrafo</p>
-  <input type="text" [(ngModel)]="name">
-  <button class="btn-primary" (click)="onSearch(name)">Buscar</button>
+<div class="container" style="padding-bottom: 50px; padding-top: 50px">
+  <div class="row">
+    <div class="col form-group">
+      <input type="text" [(ngModel)]="name">
+      <button class="btn-primary" (click)="onSearch(name)">Buscar</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
-      <h3>ngFor example</h3>
       <ul>
-        <li *ngFor="let person of people">
+        <li class="list-group-item-action p-1" *ngFor="let person of people" [routerLink]="['/user', person.id]" style="cursor: pointer">
           {{person.name}} ({{person.age}})
         </li>
       </ul>
     </div>
     <div class="col">
-      <h3>ngFor example with index</h3>
-      <ul>
-        <li *ngFor="let person of people; let i = index">
-          {{i}} {{person.name}} ({{person.age}})
-        </li>
-      </ul>
+      <router-outlet *ngIf="router.url != '/users'"></router-outlet>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col">
-      <h3>ngIf example</h3>
-      <ul>
-        <ng-container *ngFor="let person of people">
-          <li *ngIf="person.age >= 30">
-            {{person.name}} ({{person.age}})
-          </li>
-        </ng-container>
-      </ul>
-    </div>
-    <div class="col">
-      <h3>ngSwitch example</h3>
-      <ul>
-        <ng-container *ngFor="let person of people" [ngSwitch]="person.country">
-          <li *ngSwitchCase="'ES'" class="text-danger">
-            {{person.name}} ({{person.age}})
-          </li>
-          <li *ngSwitchCase="'FR'" class="text-primary">
-            {{person.name}} ({{person.age}})
-          </li>
-          <li *ngSwitchDefault class="text-warning">
-            {{person.name}} ({{person.age}})
-          </li>
-        </ng-container>
-      </ul>
-    </div>
-  </div>
-
-
 </div>

@@ -9,13 +9,15 @@ import {FooterComponent} from './footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import {PersonsService} from './persons.service';
 import {HttpClientModule} from '@angular/common/http';
+import {UserDetailComponent} from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ContentComponent,
-    FooterComponent
+    FooterComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
