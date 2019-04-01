@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {PersonsService} from '../persons.service';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {UsersService} from '../users.service';
 import 'rxjs/Rx';
 import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../user.model';
 
 @Component({
   selector: 'app-content',
@@ -10,23 +11,22 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ContentComponent implements OnInit {
   name = '';
-  people: { name: string; age: number; country: string }[] = [];
-  selectedPerson = null;
+  users: User[] = [];
+  selectedUser = null;
 
-  constructor(private personsService: PersonsService, public router: Router){}
+  constructor(private personsService: UsersService, public router: Router){}
 
   ngOnInit(): void {
     this.personsService.getAllPeople()
       .subscribe(
-        (users: {id: number; name: string; age: number; country: string }[]) => {
-          this.people = users;
+        (users) => {
+          this.users = users;
         },
-        (error) => {},
-        () => {}
+        (error) => {console.log(error)}
       )
   }
 
   onPersonSelected(person: {id: number; name: string; age: number; country: string}) {
-    this.selectedPerson = person;
+    this.selectedUser = person;
   }
 }

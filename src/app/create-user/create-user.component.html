@@ -1,0 +1,17 @@
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="inputName">Nombre</label>
+      <input type="text" class="form-control" formControlName="name" id="inputName" placeholder="Escribe tu nombre">
+    </div>
+    <div class="form-group">
+      <label for="inputMail">Mail</label>
+      <input type="email" class="form-control" formControlName="mail" id="inputMail" placeholder="Mail">
+    </div>
+    <div class="form-group">
+      <label for="inputAge">Edad</label>
+      <input type="number" class="form-control" formControlName="age" id="inputAge" placeholder="Edad">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" >Submit</button>
+  </form>
+</div>

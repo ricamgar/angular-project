@@ -6,10 +6,11 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {ContentComponent} from './content/content.component';
 import {FooterComponent} from './footer/footer.component';
-import {FormsModule} from '@angular/forms';
-import {PersonsService} from './persons.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UsersService} from './users.service';
 import {HttpClientModule} from '@angular/common/http';
 import {UserDetailComponent} from './user-detail/user-detail.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -17,15 +18,17 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
     HeaderComponent,
     ContentComponent,
     FooterComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [PersonsService],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

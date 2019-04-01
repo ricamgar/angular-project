@@ -2,13 +2,15 @@
   <div class="row">
     <div class="col form-group">
       <input type="text" [(ngModel)]="name">
-      <button class="btn-primary" (click)="onSearch(name)">Buscar</button>
+      <button class="btn btn-primary ml-1" (click)="onSearch(name)">Buscar</button>
+      <button class="btn btn-warning ml-1" [routerLink]="['/new']">Nuevo usuario</button>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <ul>
-        <li class="list-group-item-action p-1" *ngFor="let person of people" [routerLink]="['/user', person.id]" style="cursor: pointer">
+        <li class="list-group-item-action p-1" *ngFor="let person of users" [routerLink]="['/user', person.id]"
+            style="cursor: pointer">
           {{person.name}} ({{person.age}})
         </li>
       </ul>
