@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UsersService} from '../users.service';
+import {User} from '../user.model';
 
 @Component({
   selector: 'app-user-detail',
@@ -9,9 +10,10 @@ import {UsersService} from '../users.service';
 })
 export class UserDetailComponent implements OnInit {
 
-  user;
+  user: User;
 
-  constructor(private activatedRoute: ActivatedRoute, private personsService: UsersService) {}
+  constructor(private activatedRoute: ActivatedRoute, private personsService: UsersService, private router: Router) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -26,5 +28,17 @@ export class UserDetailComponent implements OnInit {
             );
         }
       );
+  }
+
+  deleteClicked() {
+    this.personsService.delete(this.user)
+      .subscribe(
+        success => {
+          window.alert('Usuario borrado');
+          this.router.navigate(['/users'])
+        },
+        error => window.alert('No tienes permiso para borrar')
+      );
+
   }
 }

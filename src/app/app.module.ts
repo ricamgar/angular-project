@@ -8,9 +8,12 @@ import {ContentComponent} from './content/content.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UsersService} from './users.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserDetailComponent} from './user-detail/user-detail.component';
-import { CreateUserComponent } from './create-user/create-user.component';
+import {CreateUserComponent} from './create-user/create-user.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {TokenInterceptor} from './token.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
     ContentComponent,
     FooterComponent,
     UserDetailComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,10 @@ import { CreateUserComponent } from './create-user/create-user.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

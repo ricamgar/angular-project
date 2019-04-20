@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from './user.model';
 
 @Injectable()
 export class UsersService {
+
+  public loggedUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('loggedUser')));
 
   constructor(private http: HttpClient) {
   }
@@ -18,6 +20,19 @@ export class UsersService {
   }
 
   saveUser(user: User) {
-    return this.http.post<User>('http://localhost:8888/user', user);
+    return this.http.post<User>('http://localhost:8888/user', user)
+      .map(user => {
+        localStorage.setItem('loggedUser', JSON.stringify(user));
+        this.loggedUserSubject.next(user);
+      });
+  }
+
+  logout() {
+    localStorage.removeItem('loggedUser');
+    this.loggedUserSubject.next(null);
+  }
+
+  delete(user: User) {
+    return this.http.delete('http://localhost:8888/user/' + user.id)
   }
 }

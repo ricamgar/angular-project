@@ -3,12 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import {ContentComponent} from './content/content.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {CreateUserComponent} from './create-user/create-user.component';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'users', pathMatch: 'full'},
-  {path: 'users', component: ContentComponent},
-  {path: 'user/:id', component: UserDetailComponent},
+  {path: 'users', component: ContentComponent, children: [
+      {path: ':id', component: UserDetailComponent},
+    ]},
   {path: 'new', component: CreateUserComponent},
+  {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({
