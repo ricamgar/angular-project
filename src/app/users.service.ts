@@ -27,6 +27,20 @@ export class UsersService {
       });
   }
 
+  login(mail: string, password: string) {
+    return this.http.post<User>('http://localhost:8888/login', {mail: mail, password: password})
+      .map(user => {
+        localStorage.setItem('loggedUser', JSON.stringify(user));
+        this.loggedUserSubject.next(user);
+      });
+  }
+
+  updateUser(user: User) {
+    return this.http.put<User>('http://localhost:8888/user/' + user.id, user);
+  }
+
+
+
   logout() {
     localStorage.removeItem('loggedUser');
     this.loggedUserSubject.next(null);

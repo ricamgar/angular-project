@@ -14,6 +14,7 @@ import {CreateUserComponent} from './create-user/create-user.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {TokenInterceptor} from './token.interceptor';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {TokenInterceptor} from './token.interceptor';
     UserDetailComponent,
     CreateUserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
